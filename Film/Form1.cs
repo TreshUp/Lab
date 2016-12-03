@@ -33,26 +33,32 @@ namespace Film
                 elementsCartoon.Add(objC);
             }
         }
-
+        TextBox[] tb = new TextBox[2]; //todo nomer
         private void Show_Active_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < 3; i++)//todo nomer
+            for (int i = 0; i < tb.Length; i++)
             {
-                TextBox Tb = new TextBox();
-                Tb.Location = new Point(10, i * (Tb.Height + 10));
-                Tb.Text = elementsActive[i-1].Name;
-                this.Controls.Add(Tb);
+                tb[i] = new System.Windows.Forms.TextBox();
+                tb[i].Location = new System.Drawing.Point(10, i * (23+10));
+                tb[i].Name = "textBox" + i.ToString();
+                tb[i].Size = new System.Drawing.Size(75, 23);
+                tb[i].TabIndex = i;
+                tb[i].Text = elementsActive[i].Name;
+                Controls.Add(tb[i]);
             }
         }
 
         private void ShowCartoons_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < 3; i++)//todo nomer
+            for (int i = 0; i < tb.Length; i++)
             {
-                TextBox Tb = new TextBox();
-                Tb.Location = new Point(200, i * (Tb.Height + 10));
-                Tb.Text = elementsCartoon[i - 1].Name;
-                this.Controls.Add(Tb);
+                tb[i] = new System.Windows.Forms.TextBox();
+                tb[i].Location = new System.Drawing.Point(200, i * (23 + 10));
+                tb[i].Name = "textBox" + i.ToString();
+                tb[i].Size = new System.Drawing.Size(75, 23);
+                tb[i].TabIndex = i;
+                tb[i].Text = elementsCartoon[i].Name;
+                Controls.Add(tb[i]);
             }
         }
     }

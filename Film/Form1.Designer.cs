@@ -35,21 +35,21 @@
             // 
             // Show_Active
             // 
-            this.Show_Active.Location = new System.Drawing.Point(519, 31);
+            this.Show_Active.Location = new System.Drawing.Point(519, 2);
             this.Show_Active.Name = "Show_Active";
             this.Show_Active.Size = new System.Drawing.Size(75, 23);
             this.Show_Active.TabIndex = 0;
-            this.Show_Active.Text = "Show Films";
+            this.Show_Active.Text = "Films";
             this.Show_Active.UseVisualStyleBackColor = true;
             this.Show_Active.Click += new System.EventHandler(this.Show_Active_Click);
             // 
             // ShowCartoons
             // 
-            this.ShowCartoons.Location = new System.Drawing.Point(519, 60);
+            this.ShowCartoons.Location = new System.Drawing.Point(519, 31);
             this.ShowCartoons.Name = "ShowCartoons";
             this.ShowCartoons.Size = new System.Drawing.Size(75, 23);
             this.ShowCartoons.TabIndex = 1;
-            this.ShowCartoons.Text = "Show Cartoons";
+            this.ShowCartoons.Text = "Cartoons";
             this.ShowCartoons.UseVisualStyleBackColor = true;
             this.ShowCartoons.Click += new System.EventHandler(this.ShowCartoons_Click);
             // 
