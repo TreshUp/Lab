@@ -23,7 +23,7 @@ namespace Film
                 f_num_series = value;
             }
         }
-        public int Num_Seasans
+        public int Num_Seasons
         {
             get
             {
@@ -48,41 +48,33 @@ namespace Film
         public T_Serial() : base()
         {
             Num_series = 1;
-            Num_Seasans = 1;
+            Num_Seasons = 1;
             Operator = "null";
         }
         public override void Read_File(int number, string name_file)
         {
-            using (StreamReader input = new StreamReader(@"D:\inputS.txt"))
+            using (StreamReader input = new StreamReader((@"G:\inputS.txt"),System.Text.Encoding.Default)) //todo_path
             {
                 int n = 0;
-                string slovo;
-                name_file = @"D:\inputS.txt";
+                string stroka;
+                name_file = @"G:\inputS.txt"; //todo_path
                 while (true)
                 {
                     // Читаем строку из файла во временную переменную.
-                    slovo = input.ReadLine();
+                    stroka = input.ReadLine();
                     // Если достигнут конец файла, прерываем считывание.
-                    if (slovo == null) break;
+                    if (stroka == null) break;
                     n++;
-                    if ((n % 10 >= 1) && (n % 10 <= 6)) base.Read_File(n, name_file);
-                    switch (n % 10)
+                    if (n % 3 == 1) base.Read_File(n, name_file);
+                    if (n % 3 == 2)
                     {
-                        case 7:
-                            {
-                                Num_series = int.Parse(slovo);
-                                break;
-                            }
-                        case 8:
-                            {
-                                Num_Seasans = int.Parse(slovo);
-                                break;
-                            }
-                        case 9:
-                            {
-                                Operator = slovo;
-                                break;
-                            }
+                        Num_series = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Num_Seasons = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Operator = stroka;
                     }
                 }
             }

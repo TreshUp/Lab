@@ -92,52 +92,35 @@ namespace Film
         }
         public virtual void Read_File(int number,string name_file) //todo virtual
         {
-            using (StreamReader input = new StreamReader(name_file))
+            using (StreamReader input = new StreamReader((name_file),System.Text.Encoding.Default))
             {
+                string stroka;
                 int n = 0;
-                string slovo;
                 while (true)
                 {
                     // Читаем строку из файла во временную переменную.
-                    slovo = input.ReadLine();
+                    stroka = input.ReadLine();
                     // Если достигнут конец файла, прерываем считывание.
-                    if (slovo == null) break;
+                    if (stroka == null) break;
                     n++;
                     if (n==number)
                     {
-                        switch (n % 10)
-                        {
-                            case 1:
-                                {
-                                    Name = slovo;
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    Year = int.Parse(slovo);
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    Time = int.Parse(slovo);
-                                    break;
-                                }
-                            case 4:
-                                {
-                                    Director= slovo;
-                                    break;
-                                }
-                            case 5:
-                                {
-                                    Scenarist = slovo;
-                                    break;
-                                }
-                            case 6:
-                                {
-                                    Producer = slovo;
-                                    break;
-                                }
-                        }
+                        Name = stroka.Substring(0, stroka.IndexOf(' '));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Year = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Time = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Director = stroka.Substring(0, stroka.IndexOf(' '));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Producer = stroka.Substring(0, stroka.IndexOf(' '));
+                        stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
+                        Scenarist = stroka;
                     }
                 }
             }

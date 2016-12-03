@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Film
 {
-    class T_Documentary : T_Full_Movie //todo
+    class T_Documentary : T_Movie //todo
     {
         //todo;
         public override void Read_File(int number, string name)
