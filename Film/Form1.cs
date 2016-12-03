@@ -18,12 +18,14 @@ namespace Film
         {
             InitializeComponent();
         }
+
         //IList<T_Abs_Film> elements = new List<T_Abs_Film>();
         IList<T_Action_Movie> elementsActive = new List<T_Action_Movie>();
         IList<T_Cartoon> elementsCartoon = new List<T_Cartoon>();
         private void Form1_Load(object sender, EventArgs e)
         {
-           for(int i=1;i<5;i+=3) //todo nomer
+            
+            for(int i=1;i<5;i+=3) //todo nomer
             {
                 T_Action_Movie objA = new T_Action_Movie();
                 T_Cartoon objC = new T_Cartoon(); 
@@ -34,6 +36,7 @@ namespace Film
             }
         }
         TextBox[] tb = new TextBox[2]; //todo nomer
+        TextBox[] cb = new TextBox[2];
         private void Show_Active_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < tb.Length; i++)
@@ -54,16 +57,46 @@ namespace Film
         }
         private void ShowCartoons_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < cb.Length; i++)
+            {
+                cb[i] = new System.Windows.Forms.TextBox();
+                cb[i].Location = new System.Drawing.Point(200, i * (23 + 10));
+                cb[i].Name = "textBox" + i.ToString();
+                cb[i].Size = new System.Drawing.Size(75, 23);
+                cb[i].TabIndex = i;
+                cb[i].Text = elementsCartoon[i].Name;
+                cb[i].Click += new System.EventHandler(this.textBox_Click);
+                Controls.Add(cb[i]);
+            }
+        }
+        private void Clear_Click(object sender, EventArgs e)
+        {
             for (int i = 0; i < tb.Length; i++)
             {
-                tb[i] = new System.Windows.Forms.TextBox();
-                tb[i].Location = new System.Drawing.Point(200, i * (23 + 10));
-                tb[i].Name = "textBox" + i.ToString();
-                tb[i].Size = new System.Drawing.Size(75, 23);
-                tb[i].TabIndex = i;
-                tb[i].Text = elementsCartoon[i].Name;
-                tb[i].Click += new System.EventHandler(this.textBox_Click);
-                Controls.Add(tb[i]);
+                tb[i].Text = "";
+            }
+            for (int i = 0; i < cb.Length; i++)
+            {
+                cb[i].Text = "";
+            }
+        }
+
+        private void Sort_year_Click(object sender, EventArgs e)
+        {
+            //todo except
+            for (int i = 0; i < elementsActive.Count; i++)
+            {
+                if (int.Parse(Poisk.Text) == elementsActive[i].Year)
+                {
+                    tb[i].Text = elementsActive[i].Name;
+                }
+            }
+            for (int i = 0; i < elementsActive.Count; i++)
+            {
+                if (int.Parse(Poisk.Text) == elementsCartoon[i].Year)
+                {
+                    cb[i].Text = elementsCartoon[i].Name;
+                }
             }
         }
     }

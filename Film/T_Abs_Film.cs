@@ -90,7 +90,7 @@ namespace Film
             Producer = "null";
             Scenarist = "null";
         }
-        public virtual void Read_File(int number,string name_file) //todo virtual
+        public virtual void Read_File(int number,string name_file)
         {
             using (StreamReader input = new StreamReader((name_file),System.Text.Encoding.Default))
             {
