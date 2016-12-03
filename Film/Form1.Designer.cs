@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Show_Active = new System.Windows.Forms.Button();
             this.ShowCartoons = new System.Windows.Forms.Button();
+            this.Sort_Films = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Show_Active
@@ -53,12 +54,22 @@
             this.ShowCartoons.UseVisualStyleBackColor = true;
             this.ShowCartoons.Click += new System.EventHandler(this.ShowCartoons_Click);
             // 
+            // Sort_Films
+            // 
+            this.Sort_Films.Location = new System.Drawing.Point(519, 111);
+            this.Sort_Films.Name = "Sort_Films";
+            this.Sort_Films.Size = new System.Drawing.Size(75, 23);
+            this.Sort_Films.TabIndex = 2;
+            this.Sort_Films.Text = "Sort films";
+            this.Sort_Films.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(606, 386);
+            this.Controls.Add(this.Sort_Films);
             this.Controls.Add(this.ShowCartoons);
             this.Controls.Add(this.Show_Active);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -73,6 +84,7 @@
 
         private System.Windows.Forms.Button Show_Active;
         private System.Windows.Forms.Button ShowCartoons;
+        private System.Windows.Forms.Button Sort_Films;
 
     }
 }

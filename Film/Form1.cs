@@ -44,10 +44,14 @@ namespace Film
                 tb[i].Size = new System.Drawing.Size(75, 23);
                 tb[i].TabIndex = i;
                 tb[i].Text = elementsActive[i].Name;
+                tb[i].Click += new System.EventHandler(this.textBox_Click);
                 Controls.Add(tb[i]);
             }
         }
-
+        private void textBox_Click(object sender, EventArgs e) //todo view
+        {
+            this.Text = "1";
+        }
         private void ShowCartoons_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < tb.Length; i++)
@@ -58,6 +62,7 @@ namespace Film
                 tb[i].Size = new System.Drawing.Size(75, 23);
                 tb[i].TabIndex = i;
                 tb[i].Text = elementsCartoon[i].Name;
+                tb[i].Click += new System.EventHandler(this.textBox_Click);
                 Controls.Add(tb[i]);
             }
         }
