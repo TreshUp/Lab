@@ -18,43 +18,42 @@ namespace Film
         {
             InitializeComponent();
         }
-        IList<T_Abs_Film> elements = new List<T_Abs_Film>();
+        //IList<T_Abs_Film> elements = new List<T_Abs_Film>();
+        IList<T_Action_Movie> elementsActive = new List<T_Action_Movie>();
+        IList<T_Cartoon> elementsCartoon = new List<T_Cartoon>();
         private void Form1_Load(object sender, EventArgs e)
         {
-            //T_Action_Movie my_test = new T_Action_Movie();
-            //T_Action_Movie my_ch = new T_Action_Movie();
-            T_Cartoon my_test = new T_Cartoon();
-            T_Cartoon my_ch = new T_Cartoon();
-            my_test.Read_File(1, "input");
-            textBox1.Text = my_test.Name;
-            textBox2.Text = my_test.Year.ToString();
-            textBox3.Text = my_test.Time.ToString();
-            textBox4.Text = my_test.Director;
-            textBox6.Text = my_test.Scenarist;
-            textBox5.Text = my_test.Producer;
-            textBox7.Text = my_test.Audio.ToString();
-            textBox8.Text = my_test.Color.ToString();
-            textBox9.Text = my_test.Category;
-            textBox21.Text = my_test.Painter;
-            //textBox10.Text = my_test.Painter;
+           for(int i=1;i<5;i+=3) //todo nomer
+            {
+                T_Action_Movie objA = new T_Action_Movie();
+                T_Cartoon objC = new T_Cartoon(); 
+                objA.Read_File(i, "out");
+                elementsActive.Add(objA);
+                objC.Read_File(i, "out");
+                elementsCartoon.Add(objC);
+            }
+        }
 
-            my_ch.Read_File(4, "input");
-            textBox11.Text = my_ch.Name;
-            textBox12.Text = my_ch.Year.ToString();
-            textBox13.Text = my_ch.Time.ToString();
-            textBox14.Text = my_ch.Director;
-            textBox16.Text = my_ch.Scenarist;
-            textBox15.Text = my_ch.Producer;
-            textBox17.Text = my_ch.Audio.ToString();
-            textBox18.Text = my_ch.Color.ToString();
-            textBox19.Text = my_ch.Category;
-            textBox20.Text = my_ch.Painter;
+        private void Show_Active_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < 3; i++)//todo nomer
+            {
+                TextBox Tb = new TextBox();
+                Tb.Location = new Point(10, i * (Tb.Height + 10));
+                Tb.Text = elementsActive[i-1].Name;
+                this.Controls.Add(Tb);
+            }
+        }
 
-            //textBox12.Text = my_test.Arist1;
-            //textBox10.Text = my_test.Operator;
-            //textBox11.Text = my_test.Composer;
-            //textBox13.Text = my_test.Arist2;
-            //textBox14.Text = my_test.Arist3;
+        private void ShowCartoons_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < 3; i++)//todo nomer
+            {
+                TextBox Tb = new TextBox();
+                Tb.Location = new Point(200, i * (Tb.Height + 10));
+                Tb.Text = elementsCartoon[i - 1].Name;
+                this.Controls.Add(Tb);
+            }
         }
     }
 }
