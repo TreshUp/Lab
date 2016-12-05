@@ -29,10 +29,10 @@ namespace Film
         {
             string stroka;
             //todo excepiton
-            using (StreamReader input = new StreamReader((@"F:\inputC.txt"),System.Text.Encoding.Default)) //to_path
+            using (StreamReader input = new StreamReader((@"D:\inputC.txt"),System.Text.Encoding.Default)) //to_path
             {
                 int n = 0;
-                name_file = @"F:\inputC.txt"; //to_path
+                name_file = @"D:\inputC.txt"; //to_path
                 while (true)
                 {
                     // Читаем строку из файла во временную переменную.
@@ -45,6 +45,7 @@ namespace Film
                         base.Read_File(number+1, name_file);
                         {
                             Painter = stroka;
+                            if (Painter.IndexOf("_") != -1) Painter = Painter.Replace("_", " ");
                         }
                     }
                 }

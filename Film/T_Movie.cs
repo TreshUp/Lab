@@ -80,6 +80,7 @@ namespace Film
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
                             //считывание жанра фильма
                             Category = stroka;
+                            if (Category.IndexOf("_") != -1) Category = Category.Replace("_", " ");
                             //вызываем функция считывания из файла предка
                             base.Read_File(number-1, name_file);
                     }

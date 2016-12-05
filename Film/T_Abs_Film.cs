@@ -107,6 +107,7 @@ namespace Film
                     {
                         Name = stroka.Substring(0, stroka.IndexOf(' '));
                         stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+                        if (Name.IndexOf("_") != -1) Name = Name.Replace("_", " ");
 
                         Year = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
                         stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
@@ -116,11 +117,14 @@ namespace Film
 
                         Director = stroka.Substring(0, stroka.IndexOf(' '));
                         stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+                        if (Director.IndexOf("_") != -1) Director = Director.Replace("_", " ");
 
                         Producer = stroka.Substring(0, stroka.IndexOf(' '));
                         stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+                        if (Producer.IndexOf("_") != -1) Producer = Producer.Replace("_", " ");
 
                         Scenarist = stroka;
+                        if (Scenarist.IndexOf("_") != -1) Scenarist = Scenarist.Replace("_", " ");
                     }
                 }
             }
