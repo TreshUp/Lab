@@ -25,7 +25,7 @@ namespace Film
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            for(int i=1;i<5;i+=3) //todo nomer
+            for(int i=1;i<7;i+=3) //todo nomer
             {
                 T_Action_Movie objA = new T_Action_Movie();
                 T_Cartoon objC = new T_Cartoon(); 
@@ -53,7 +53,7 @@ namespace Film
         }
         private void textBox_Click(object sender, EventArgs e) //todo view
         {
-            this.Text = "1";
+            //todo
         }
         private void ShowCartoons_Click(object sender, EventArgs e)
         {
@@ -86,14 +86,41 @@ namespace Film
             //todo except
             for (int i = 0; i < elementsActive.Count; i++)
             {
-                if (int.Parse(Poisk.Text) == elementsActive[i].Year)
+                if (elementsActive[i].Sort_year(int.Parse(Poisk.Text))==true)
                 {
                     tb[i].Text = elementsActive[i].Name;
                 }
             }
+            for (int i = 0; i < elementsCartoon.Count; i++)
+            {
+                if (elementsCartoon[i].Sort_year(int.Parse(Poisk.Text)) == true)
+                {
+                    cb[i].Text = elementsCartoon[i].Name;
+                }
+            }
+        }
+
+        private void Sort_cat_Click(object sender, EventArgs e)
+        {
+            //todo except
             for (int i = 0; i < elementsActive.Count; i++)
             {
-                if (int.Parse(Poisk.Text) == elementsCartoon[i].Year)
+                //if (Poisk.Text.LastIndexOf(" ") == Poisk.Text.Length)
+                //{
+                //    Poisk.Text = Poisk.Text.Substring(0, Poisk.Text.IndexOf(' '));
+                //}
+                if (elementsActive[i].Sort_Cat(Poisk.Text) == true)
+                {
+                    tb[i].Text = elementsActive[i].Name;
+                }
+            }
+            for (int i = 0; i < elementsCartoon.Count; i++)
+            {
+                //if (Poisk.Text.LastIndexOf(" ")==Poisk.Text.Length)
+                //{
+                //    Poisk.Text = Poisk.Text.Substring(0, Poisk.Text.IndexOf(' '));
+                //}
+                if (elementsCartoon[i].Sort_Cat(Poisk.Text) == true)
                 {
                     cb[i].Text = elementsCartoon[i].Name;
                 }

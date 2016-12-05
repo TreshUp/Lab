@@ -96,10 +96,10 @@ namespace Film
         {
             string stroka;
             //todo excepiton
-            using (StreamReader input = new StreamReader((@"H:\inputA.txt"),System.Text.Encoding.Default)) //to_path
+            using (StreamReader input = new StreamReader((@"F:\inputA.txt"),System.Text.Encoding.Default)) //to_path
             {
                 int n = 0;
-                name_file = @"H:\inputA.txt"; //to_path
+                name_file = @"F:\inputA.txt"; //to_path
                 while(true)
                 {
                     // Читаем строку из файла во временную переменную.
@@ -109,13 +109,8 @@ namespace Film
                     n++;
                     if (n == (number+2))
                     {
-                        /*if (n % 3 == 1)*/ base.Read_File(number+1, name_file);
-                        /*if (n % 3 == 2) base.Read_File(n, name_file);*/
-                        //if (n % 3 == 0)
-                        ///{
-                            //Category = stroka.Substring(0, stroka.IndexOf(' '));
-                            //stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
-
+                             base.Read_File(number+1, name_file);
+     
                             Operator = stroka.Substring(0, stroka.IndexOf(' '));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
 
@@ -127,9 +122,7 @@ namespace Film
                             f_artist2 = stroka.Substring(0, stroka.IndexOf(' '));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
                             f_artist3 = stroka;
-                        //}
                     }
-                    //break;
                 }
             }
         }

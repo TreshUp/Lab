@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace Film
 {
@@ -81,6 +82,16 @@ namespace Film
                     }
                 }
             }
+        }
+        public bool Sort_Cat(string cat)
+        {
+            string check="";
+            if (this.Category.LastIndexOf(" ") == this.Category.Length-1)
+            {
+                check = this.Category.Substring(0, this.Category.IndexOf(' '));
+            }
+            if (String.Compare(check, cat, new CultureInfo(""), CompareOptions.IgnoreCase) == 0) return true;
+            else return false;
         }
     }
 }

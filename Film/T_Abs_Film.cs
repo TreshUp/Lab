@@ -125,5 +125,10 @@ namespace Film
                 }
             }
         }
+        public bool Sort_year(int year)
+        {
+            if (this.Year == year) return true;
+            else return false;
+        }
     }
 }

@@ -34,6 +34,7 @@
             this.Sort_year = new System.Windows.Forms.Button();
             this.Poisk = new System.Windows.Forms.TextBox();
             this.Clear = new System.Windows.Forms.Button();
+            this.Sort_cat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Show_Active
@@ -83,12 +84,23 @@
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // Sort_cat
+            // 
+            this.Sort_cat.Location = new System.Drawing.Point(519, 140);
+            this.Sort_cat.Name = "Sort_cat";
+            this.Sort_cat.Size = new System.Drawing.Size(75, 23);
+            this.Sort_cat.TabIndex = 5;
+            this.Sort_cat.Text = "Sort cat";
+            this.Sort_cat.UseVisualStyleBackColor = true;
+            this.Sort_cat.Click += new System.EventHandler(this.Sort_cat_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(606, 386);
+            this.Controls.Add(this.Sort_cat);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.Poisk);
             this.Controls.Add(this.Sort_year);
@@ -110,6 +122,7 @@
         private System.Windows.Forms.Button Sort_year;
         private System.Windows.Forms.TextBox Poisk;
         private System.Windows.Forms.Button Clear;
+        private System.Windows.Forms.Button Sort_cat;
 
     }
 }
