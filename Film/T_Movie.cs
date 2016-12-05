@@ -13,6 +13,7 @@ namespace Film
         protected int f_audio; // "1" - have sound "0" - no sound
         protected int f_color; // "1" - colored "0" - black and white
         protected string f_category;
+        
         public int Audio
         {
             get
@@ -24,6 +25,7 @@ namespace Film
                 f_audio = value;
             }
         }
+
         public int Color //todo exceptions
         {
             get
@@ -35,6 +37,7 @@ namespace Film
                 f_color=value;
             }
         }
+
         public string Category
         {
             get
@@ -46,12 +49,14 @@ namespace Film
                 f_category = value;
             }
         }
+
         public T_Movie() : base()
         {
             Audio = 1;
             Color = 1;
             Category = "null";
         }
+        //функция считывания из файла
         public override void Read_File(int number, string name_file)
         {
             string stroka;
@@ -67,30 +72,31 @@ namespace Film
                     n++;
                     if (n==number)
                     {
-                       // if (n % 3 == 2)
-                        //{
+                            //считывание поля аудио
                             Audio = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
-
+                            //считывание поля цвет
                             Color = int.Parse(stroka.Substring(0, stroka.IndexOf(' ')));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
-
+                            //считывание жанра фильма
                             Category = stroka;
-                            
-                        //}
-                        /*if (n % 3 == 1)*/ { base.Read_File(number-1, name_file); }
+                            //вызываем функция считывания из файла предка
+                            base.Read_File(number-1, name_file);
                     }
                 }
             }
         }
+        //функция сортировки фильмов по жанру
         public bool Sort_Cat(string cat)
         {
-            string check="";
-            if (this.Category.LastIndexOf(" ") == this.Category.Length-1)
-            {
-                check = this.Category.Substring(0, this.Category.IndexOf(' '));
-            }
-            if (String.Compare(check, cat, new CultureInfo(""), CompareOptions.IgnoreCase) == 0) return true;
+            //string check="";
+            ////проверка на " " в конце строки
+            //if (this.Category.LastIndexOf(" ") == this.Category.Length - 1)
+            //{
+            //    check = this.Category.Substring(0, this.Category.IndexOf(' '));
+            //}
+            ////сравнения двух строк
+            if (String.Compare(this.Category, cat, new CultureInfo(""), CompareOptions.IgnoreCase) == 0) return true;
             else return false;
         }
     }
