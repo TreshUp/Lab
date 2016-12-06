@@ -15,6 +15,9 @@ namespace Film
 {
     public partial class Form1 : Form
     {
+        TextBox[] tb = new TextBox[4]; //todo nomer
+        TextBox[] cb = new TextBox[4];
+        TextBox[] sb = new TextBox[4];
         public Form1()
         {
             InitializeComponent();
@@ -27,46 +30,56 @@ namespace Film
                 tb[i].TabIndex = i;
                 //tb[i].Click += new System.EventHandler(this.textBox_ClickA);
                 Controls.Add(tb[i]);
+            }
+            for (int i=0;i<cb.Length;i++)
+            {
                 cb[i] = new System.Windows.Forms.TextBox();
-                cb[i].Location = new System.Drawing.Point(200, i * (23 + 10));
+                cb[i].Location = new System.Drawing.Point(150, i * (23 + 10));
                 cb[i].Name = "textBox" + i.ToString();
                 cb[i].Size = new System.Drawing.Size(80, 30);
                 cb[i].TabIndex = i;
                 //cb[i].Click += new System.EventHandler(this.textBox_ClickC);
                 Controls.Add(cb[i]);
             }
-        }
+            for (int i=0;i<sb.Length;i++)
+            {
+                sb[i] = new System.Windows.Forms.TextBox();
+                sb[i].Location = new System.Drawing.Point(300, i * (23 + 10));
+                sb[i].Name = "textBox" + i.ToString();
+                sb[i].Size = new System.Drawing.Size(80, 30);
+                sb[i].TabIndex = i;
+                //cb[i].Click += new System.EventHandler(this.textBox_ClickC);
+                Controls.Add(sb[i]);
+            }
 
-        //IList<T_Abs_Film> elements = new List<T_Abs_Film>();
+        }
         IList<T_Action_Movie> elementsActive = new List<T_Action_Movie>();
         IList<T_Cartoon> elementsCartoon = new List<T_Cartoon>();
+        IList<T_Serial> elementsSerial = new List<T_Serial>();
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            for(int i=1;i<7;i+=3) //todo nomer
+            for(int i=1;i<13;i+=3) //todo nomer
             {
                 T_Action_Movie objA = new T_Action_Movie();
-                T_Cartoon objC = new T_Cartoon(); 
+                T_Cartoon objC = new T_Cartoon();
                 objA.Read_File(i, "out");
                 elementsActive.Add(objA);
                 objC.Read_File(i, "out");
                 elementsCartoon.Add(objC);
             }
+            for (int i=1;i<9;i+=2)
+            {
+                T_Serial objS = new T_Serial();
+                objS.Read_File(i, "out");
+                elementsSerial.Add(objS);
+            }
         }
-        TextBox[] tb = new TextBox[2]; //todo nomer
-        TextBox[] cb = new TextBox[2];
         private void Show_Active_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < tb.Length; i++)
             {
-            //    tb[i] = new System.Windows.Forms.TextBox();
-            //    tb[i].Location = new System.Drawing.Point(10, i * (23+10));
-            //    tb[i].Name = "textBox" + i.ToString();
-            //    tb[i].Size = new System.Drawing.Size(80, 30);
-            //    tb[i].TabIndex = i;
             tb[i].Text = elementsActive[i].Name;
-            //    tb[i].Click += new System.EventHandler(this.textBox_Click);
-            //    Controls.Add(tb[i]);
             }
         }
         //private void textBox_ClickA(object sender, EventArgs e) //todo view
@@ -87,14 +100,7 @@ namespace Film
         {
             for (int i = 0; i < cb.Length; i++)
             {
-                //cb[i] = new System.Windows.Forms.TextBox();
-                //cb[i].Location = new System.Drawing.Point(200, i * (23 + 10));
-                //cb[i].Name = "textBox" + i.ToString();
-                //cb[i].Size = new System.Drawing.Size(80, 30);
-                //cb[i].TabIndex = i;
                 cb[i].Text = elementsCartoon[i].Name;
-                //cb[i].Click += new System.EventHandler(this.textBox_Click);
-                //Controls.Add(cb[i]);
             }
         }
         private void ClearAll(ref TextBox[] t)
@@ -108,6 +114,7 @@ namespace Film
         {
             ClearAll(ref tb);
             ClearAll(ref cb);
+            ClearAll(ref sb);
             Poisk.Text = "";
         }
 
@@ -126,6 +133,13 @@ namespace Film
                 if (elementsCartoon[i].Sort_year(int.Parse(Poisk.Text)) == true)
                 {
                     cb[i].Text = elementsCartoon[i].Name;
+                }
+            }
+            for (int i = 0; i < elementsSerial.Count; i++)
+            {
+                if (elementsSerial[i].Sort_year(int.Parse(Poisk.Text)) == true)
+                {
+                    sb[i].Text = elementsSerial[i].Name;
                 }
             }
         }
@@ -153,9 +167,18 @@ namespace Film
         {
             ClearAll(ref tb);
             ClearAll(ref cb);
+            ClearAll(ref sb);
             for (int i=0;i<tb.Length;i++)
             {
                 //todo enum;
+            }
+        }
+
+        private void Serial_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < sb.Length; i++)
+            {
+                sb[i].Text = elementsSerial[i].Name;
             }
         }
     }
