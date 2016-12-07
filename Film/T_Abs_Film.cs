@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 namespace Film
 {
     abstract internal class T_Abs_Film //todo vidimost
@@ -34,6 +35,7 @@ namespace Film
             }
             set
             {
+                if (value <= 0) { throw new ArgumentException("Time<0"); }
                 f_time = value;
             }
         }
@@ -45,6 +47,7 @@ namespace Film
             }
             set
             {
+                if (value <=0) { throw new ArgumentException("Year<0"); }
                 f_year = value;
             }
         }
@@ -89,6 +92,17 @@ namespace Film
             Director = "null";
             Producer = "null";
             Scenarist = "null";
+        }
+        public T_Abs_Film(ref string[] c_obj)
+        {
+            Name = c_obj[0];
+            try { Time = int.Parse(c_obj[1]); }
+            catch (ArgumentException r) { MessageBox.Show(r.Message); }
+            try { Year = int.Parse(c_obj[2]); }
+            catch (ArgumentException r) { MessageBox.Show(r.Message); }
+            Director = c_obj[3];
+            Producer = c_obj[4];
+            Scenarist = c_obj[5];
         }
         public virtual void Read_File(int number,string name_file)
         {

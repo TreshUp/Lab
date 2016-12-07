@@ -14,6 +14,10 @@ namespace Film
         {
             Painter = "null";
         }
+        public T_Cartoon(ref string[] c_obj) : base(ref c_obj)
+        {
+            Painter = c_obj[9];
+        }
         public string Painter
         {
             get

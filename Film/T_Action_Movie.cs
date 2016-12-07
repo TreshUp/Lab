@@ -74,10 +74,18 @@ namespace Film
         {
             Operator = "null";
             Composer = "null";
-            f_artist1 = "null";
-            f_artist2 = "null";
-            f_artist3 = "null";
+            Arist1 = "null";
+            Arist2 = "null";
+            Arist3 = "null";
 
+        }
+        public T_Action_Movie(ref string[] c_obj) : base(ref c_obj)
+        {
+            Operator = c_obj[9];
+            Composer = c_obj[10];
+            Arist1 = c_obj[11];
+            Arist2 = c_obj[12];
+            Arist3 = c_obj[13];
         }
         public override void Read_File(int number, string name_file)
         {

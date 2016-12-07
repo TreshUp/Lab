@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
-
+using System.Windows.Forms;
 namespace Film
 {
     class T_Movie :  T_Abs_Film //todo protected
@@ -22,6 +22,7 @@ namespace Film
             }
             set
             {
+                if (value < 0) { throw new ArgumentException("Audio<0"); }
                 f_audio = value;
             }
         }
@@ -34,6 +35,7 @@ namespace Film
             }
             set
             {
+                if (value < 0) { throw new ArgumentException("Color<0"); }
                 f_color=value;
             }
         }
@@ -55,6 +57,14 @@ namespace Film
             Audio = 1;
             Color = 1;
             Category = "null";
+        }
+        public T_Movie(ref string[] c_obj) : base(ref c_obj)
+        {
+            try { Audio = int.Parse(c_obj[6]); }
+            catch (ArgumentException r) { MessageBox.Show(r.Message); }
+            try { Color = int.Parse(c_obj[7]); }
+            catch (ArgumentException r) { MessageBox.Show(r.Message); }
+            Category = c_obj[8];
         }
         //функция считывания из файла
         public override void Read_File(int number, string name_file)
@@ -90,13 +100,7 @@ namespace Film
         //функция сортировки фильмов по жанру
         public bool Sort_Cat(string cat)
         {
-            //string check="";
-            ////проверка на " " в конце строки
-            //if (this.Category.LastIndexOf(" ") == this.Category.Length - 1)
-            //{
-            //    check = this.Category.Substring(0, this.Category.IndexOf(' '));
-            //}
-            ////сравнения двух строк
+            //сравнения двух строк
             if (String.Compare(this.Category, cat, new CultureInfo(""), CompareOptions.IgnoreCase) == 0) return true;
             else return false;
         }

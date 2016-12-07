@@ -16,6 +16,10 @@ namespace Film
         TextBox[] tb = new TextBox[18]; //todo nomer
         TextBox[] cb = new TextBox[18];
         TextBox[] sb = new TextBox[18];
+        string[] fields = new string[]
+            {
+                "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"
+            };
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +30,6 @@ namespace Film
                 tb[i].Name = "textBox" + i.ToString();
                 tb[i].Size = new System.Drawing.Size(80, 30);
                 tb[i].TabIndex = i;
-                //tb[i].Click += new System.EventHandler(this.textBox_ClickA);
                 Controls.Add(tb[i]);
             }
             for (int i=0;i<cb.Length;i++)
@@ -36,7 +39,6 @@ namespace Film
                 cb[i].Name = "textBox" + i.ToString();
                 cb[i].Size = new System.Drawing.Size(80, 30);
                 cb[i].TabIndex = i;
-                //cb[i].Click += new System.EventHandler(this.textBox_ClickC);
                 Controls.Add(cb[i]);
             }
             for (int i=0;i<sb.Length;i++)
@@ -46,7 +48,6 @@ namespace Film
                 sb[i].Name = "textBox" + i.ToString();
                 sb[i].Size = new System.Drawing.Size(80, 30);
                 sb[i].TabIndex = i;
-                //cb[i].Click += new System.EventHandler(this.textBox_ClickC);
                 Controls.Add(sb[i]);
             }
 
@@ -54,7 +55,6 @@ namespace Film
         IList<T_Action_Movie> elementsActive = new List<T_Action_Movie>();
         IList<T_Cartoon> elementsCartoon = new List<T_Cartoon>();
         IList<T_Serial> elementsSerial = new List<T_Serial>();
-        //IList<string> elementsField = new List<string>();
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -81,20 +81,6 @@ namespace Film
             tb[i].Text = elementsActive[i].Name;
             }
         }
-        //private void textBox_ClickA(object sender, EventArgs e) //todo view
-        //{
-        //    //for (int i = 0; i < tb.Length;i++)
-        //    //{
-        //    //    if (tb.Tex)
-        //    //}
-        //        this.ClearAll(ref tb);
-
-        //}
-        //private void textBox_ClickC(object sender, EventArgs e) //todo view
-        //{
-        //    this.ClearAll(ref cb);
-
-        //}
         private void ShowCartoons_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < cb.Length; i++)
@@ -171,10 +157,7 @@ namespace Film
             ClearAll(ref tb);
             ClearAll(ref cb);
             ClearAll(ref sb);
-            string[] fields=new string[]
-            {
-                "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"
-            };
+
             for (int i=0;i<elementsActive.Count;i++)
             {
                 if (String.Compare(elementsActive[i].Name, Poisk.Text, new CultureInfo(""), CompareOptions.IgnoreCase) == 0)
@@ -200,7 +183,7 @@ namespace Film
                 }
             }
 
-            for (int i = 0; i < elementsActive.Count; i++)
+            for (int i = 0; i < elementsSerial.Count; i++)
             {
                 if (String.Compare(elementsSerial[i].Name, Poisk.Text, new CultureInfo(""), CompareOptions.IgnoreCase) == 0)
                 {
@@ -221,6 +204,40 @@ namespace Film
             for (int i = 0; i < sb.Length; i++)
             {
                 sb[i].Text = elementsSerial[i].Name;
+            }
+        }
+
+        private void Enter_obj_SelectionChangeCommitted(object sender, EventArgs e) //todo ssylka
+        {
+            ClearAll(ref cb);
+            ClearAll(ref sb);
+            Poisk.Text = "";
+            if (Enter_obj.SelectedItem == "Action Movie")
+            {
+                for (int j=0;j<14;j++)
+                {
+                    fields[j] = tb[j].Text;
+                }
+                T_Action_Movie objA = new T_Action_Movie(ref fields);
+                elementsActive.Add(objA);
+            }
+            if (Enter_obj.SelectedItem == "Cartoon")
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    fields[j] = tb[j].Text;
+                }
+                T_Cartoon objC = new T_Cartoon(ref fields);
+                elementsCartoon.Add(objC);
+            }
+            if (Enter_obj.SelectedItem == "Serial")
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    fields[j] = tb[j].Text;
+                }
+                T_Serial objS = new T_Serial(ref fields);
+                elementsSerial.Add(objS);
             }
         }
     }
