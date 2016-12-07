@@ -120,33 +120,37 @@ namespace Film
 
         private void Sort_year_Click(object sender, EventArgs e)
         {
-            //todo except
-            for (int i = 0; i < elementsActive.Count; i++)
+            ArgumentException r = new ArgumentException("Nothing to choose");
+            try
             {
-                if (elementsActive[i].Sort_year(int.Parse(Poisk.Text))==true)
+                for (int i = 0; i < elementsActive.Count; i++)
                 {
-                    tb[i].Text = elementsActive[i].Name;
+                    if (elementsActive[i].Sort_year(int.Parse(Poisk.Text)) == true)
+                    {
+                        tb[i].Text = elementsActive[i].Name;
+                    }
+
+                }
+                for (int i = 0; i < elementsCartoon.Count; i++)
+                {
+                    if (elementsCartoon[i].Sort_year(int.Parse(Poisk.Text)) == true)
+                    {
+                        cb[i].Text = elementsCartoon[i].Name;
+                    }
+                }
+                for (int i = 0; i < elementsSerial.Count; i++)
+                {
+                    if (elementsSerial[i].Sort_year(int.Parse(Poisk.Text)) == true)
+                    {
+                        sb[i].Text = elementsSerial[i].Name;
+                    }
                 }
             }
-            for (int i = 0; i < elementsCartoon.Count; i++)
-            {
-                if (elementsCartoon[i].Sort_year(int.Parse(Poisk.Text)) == true)
-                {
-                    cb[i].Text = elementsCartoon[i].Name;
-                }
-            }
-            for (int i = 0; i < elementsSerial.Count; i++)
-            {
-                if (elementsSerial[i].Sort_year(int.Parse(Poisk.Text)) == true)
-                {
-                    sb[i].Text = elementsSerial[i].Name;
-                }
-            }
+            catch { MessageBox.Show(r.Message); }
         }
 
         private void Sort_cat_Click(object sender, EventArgs e)
         {
-            //todo except
             for (int i = 0; i < elementsActive.Count; i++)
             {
                 if (elementsActive[i].Sort_Cat(Poisk.Text) == true)

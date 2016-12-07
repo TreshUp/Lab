@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 namespace Film
 {
-    abstract public class T_Abs_Film //todo vidimost
+    abstract internal class T_Abs_Film //todo vidimost
     {
         protected string f_name;
         protected int f_time;
@@ -131,6 +131,7 @@ namespace Film
         }
         public bool Sort_year(int year)
         {
+            //if (year==0) { throw new ArgumentException("Nothing to choose"); }
             if (this.Year == year) return true;
             else return false;
         }
