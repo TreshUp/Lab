@@ -9,7 +9,6 @@ namespace Film
 {
     class T_Action_Movie : T_Movie //todo
     {
-        //protected string f_category;
         protected string f_operator;
         protected string f_composer;
         protected string f_artist1;
@@ -49,17 +48,6 @@ namespace Film
                 f_artist1 = value;
             }
         }
-        //public string Category
-        //{
-        //    get
-        //    {
-        //        return f_category;
-        //    }
-        //    set
-        //    {
-        //        f_category = value;
-        //    }
-        //}
         public string Operator
         {
             get
@@ -84,7 +72,6 @@ namespace Film
         }
         public T_Action_Movie() : base()
         {
-            //Category = "null";
             Operator = "null";
             Composer = "null";
             f_artist1 = "null";
@@ -110,26 +97,40 @@ namespace Film
                     if (n == (number+2))
                     {
                             base.Read_File(number+1, name_file);
+
                             //считывания поля оператор
                             Operator = stroka.Substring(0, stroka.IndexOf(' '));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
                             if (Operator.IndexOf("_") != -1) Operator = Operator.Replace("_", " ");
+
                             //считвание поля композитор
                             Composer = stroka.Substring(0, stroka.IndexOf(' '));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
                             if (Composer.IndexOf("_") != -1) Composer = Composer.Replace("_", " ");
+
                             //считывания полей актеры
                             f_artist1 = stroka.Substring(0, stroka.IndexOf(' '));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
                             if (f_artist1.IndexOf("_") != -1) f_artist1 = f_artist1.Replace("_", " ");
+
                             f_artist2 = stroka.Substring(0, stroka.IndexOf(' '));
                             stroka = stroka.Remove(0, stroka.IndexOf(' ') + 1);
+
                             if (f_artist2.IndexOf("_") != -1) f_artist2 = f_artist2.Replace("_", " ");
                             f_artist3 = stroka;
                             if (f_artist3.IndexOf("_") != -1) f_artist3 = f_artist3.Replace("_", " ");
                     }
                 }
             }
+        }
+        public override void Show_All_Info(ref string[] fields)
+        {
+            base.Show_All_Info(ref fields);
+            fields[9] = this.Operator;
+            fields[10] = this.Composer;
+            fields[11] = this.Arist1;
+            fields[12] = this.Arist2;
+            fields[13] = this.Arist3;
         }
     }
 }

@@ -100,5 +100,14 @@ namespace Film
             if (String.Compare(this.Category, cat, new CultureInfo(""), CompareOptions.IgnoreCase) == 0) return true;
             else return false;
         }
+        public override void Show_All_Info (ref string[] fields)
+        {
+            base.Show_All_Info(ref fields);
+            if (Audio == 1) fields[6] = "Со звуком";
+            else fields[6] = "Без звука";
+            if (Color == 1) fields[7] = "Цветной";
+            else fields[7] = "Черно-белый";
+            fields[8] = this.Category;
+        }
     }
 }

@@ -131,9 +131,17 @@ namespace Film
         }
         public bool Sort_year(int year)
         {
-            //if (year==0) { throw new ArgumentException("Nothing to choose"); }
             if (this.Year == year) return true;
             else return false;
+        }
+        public virtual void Show_All_Info(ref string[] fields)
+        {
+            fields[0] = this.Name;
+            fields[1] = this.Year.ToString();
+            fields[2] = this.Time.ToString();
+            fields[3] = this.Director;
+            fields[4] = this.Scenarist;
+            fields[5] = this.Producer;
         }
     }
 }

@@ -51,5 +51,10 @@ namespace Film
                 }
             }
         }
+        public override void Show_All_Info(ref string[] fields)
+        {
+            base.Show_All_Info(ref fields);
+            fields[14] = this.Painter;
+        }
     }
 }
