@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 namespace Film
 {
-    class T_Cartoon: T_Movie//todo
+    internal class T_Cartoon: T_Movie//todo
     {
         //todo
         protected string f_painter;
@@ -58,7 +58,7 @@ namespace Film
         public override void Show_All_Info(ref string[] fields)
         {
             base.Show_All_Info(ref fields);
-            fields[14] = this.Painter;
+            fields[9] = this.Painter;
         }
     }
 }
