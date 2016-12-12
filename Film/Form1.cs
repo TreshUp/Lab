@@ -119,7 +119,10 @@ namespace Film
 
         private void Sort_year_Click(object sender, EventArgs e)//todo ssylka
         {
-            ArgumentException r = new ArgumentException("Nothing to choose");
+            ArgumentException r = new ArgumentException("Nothing to choose.");
+            ClearAll(ref tb);
+            ClearAll(ref cb);
+            ClearAll(ref sb);
             try
             {
                 for (int i = 0; i < elementsActive.Count; i++)
@@ -150,6 +153,9 @@ namespace Film
 
         private void Sort_cat_Click(object sender, EventArgs e)//todo ssylka
         {
+            ClearAll(ref tb);
+            ClearAll(ref cb);
+            ClearAll(ref sb);
             for (int i = 0; i < elementsActive.Count; i++)
             {
                 if (elementsActive[i].Sort_Cat(Poisk.Text) == true)
