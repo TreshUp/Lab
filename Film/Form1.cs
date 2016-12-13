@@ -14,64 +14,22 @@ namespace Film
     public partial class Form1 : Form
     {
         static int n = 18;
-        TextBox[] tb = new TextBox[n]; //todo nomer
-        TextBox[] cb = new TextBox[n];
-        TextBox[] sb = new TextBox[n];
-        
-        string[] Activefields = new string[]
-            {
-                "0","1","2","3","4","5","6","7","8","9","10","11","12","13"
-            };
-        string[] Cartoonfields = new string[]
-            {
-                "0","1","2","3","4","5","6","7","8","9"
-            };
-        string[] Serialfields = new string[]
-            {
-                "0","1","2","3","4","5","6","7","8"
-            };
-        string[] fieldsA; //= new string[]
-        //    {
-        //        //"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"
-        //    };
-        ////IList<string> fields = new List<string>();
+        TextBox[] tb; 
+        TextBox[] cb; 
+        TextBox[] sb; 
+        public event Action Changed;
+        string[] Activefields = new string[14];
+
+        string[] Cartoonfields = new string[10];
+
+        string[] Serialfields = new string[9];
+
+        string[] fieldsA;
         string[] fieldsC;
         string[] fieldsS;
         public Form1()
         {
             InitializeComponent();
-            QsortBox.Items.Add("Name");
-            QsortBox.Items.Add("Year");
-            QsortBox.Items.Add("Time");
-            QsortBox.Items.Add("Num_Seasons");
-            QsortBox.Items.Add("Num_Series");
-            for (int i = 0; i < tb.Length; i++)
-            {
-                tb[i] = new System.Windows.Forms.TextBox();
-                tb[i].Location = new System.Drawing.Point(10, i * (23 + 10));
-                tb[i].Name = "textBox" + i.ToString();
-                tb[i].Size = new System.Drawing.Size(80, 30);
-                tb[i].TabIndex = i;
-                Controls.Add(tb[i]);
-            }
-            for (int i=0;i<cb.Length;i++)
-            {
-                cb[i] = new System.Windows.Forms.TextBox();
-                cb[i].Location = new System.Drawing.Point(150, i * (23 + 10));
-                cb[i].Name = "textBox" + i.ToString();
-                cb[i].Size = new System.Drawing.Size(80, 30);
-                cb[i].TabIndex = i;
-                Controls.Add(cb[i]);
-            }
-            for (int i=0;i<sb.Length;i++)
-            {
-                sb[i] = new System.Windows.Forms.TextBox();
-                sb[i].Location = new System.Drawing.Point(300, i * (23 + 10));
-                sb[i].Name = "textBox" + i.ToString();
-                sb[i].Size = new System.Drawing.Size(80, 30);
-                sb[i].TabIndex = i;
-                Controls.Add(sb[i]);
-            }
 
         }
         IList<T_Action_Movie> elementsActive = new List<T_Action_Movie>();
@@ -79,7 +37,11 @@ namespace Film
         IList<T_Serial> elementsSerial = new List<T_Serial>();
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            QsortBox.Items.Add("Name");
+            QsortBox.Items.Add("Year");
+            QsortBox.Items.Add("Time");
+            QsortBox.Items.Add("Num_Seasons");
+            QsortBox.Items.Add("Num_Series");
             for(int i=1;i<3*n+1;i+=3) //todo nomer
             {
                 T_Action_Movie objA = new T_Action_Movie();
@@ -95,26 +57,67 @@ namespace Film
                 objS.Read_File(i, "out");
                 elementsSerial.Add(objS);
             }
+            tb = new TextBox[2*elementsActive.Count];
+            cb = new TextBox[2*elementsCartoon.Count];
+            sb = new TextBox[2*elementsSerial.Count];
+            for (int i = 0; i < elementsActive.Count; i++)
+            {
+                BoxInit(tb, i,10);
+            }
+            for (int i = 0; i < elementsCartoon.Count; i++)
+            {
+                BoxInit(cb, i,150);
+            }
+            for (int i = 0; i < elementsSerial.Count; i++)
+            {
+                BoxInit(sb, i,300);
+            }
+        }
+        public void BoxInit(TextBox[] t, int number,int pos)
+        {
+            t[number] = new System.Windows.Forms.TextBox();
+            t[number].Location = new System.Drawing.Point(pos, number * (23));
+            t[number].Name = "textBox" + number.ToString();
+            t[number].Size = new System.Drawing.Size(80, 30);
+            t[number].TabIndex = number;
+            Controls.Add(t[number]);
         }
         private void Show_Active_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < tb.Length; i++)
+            for (int i = 0; i < elementsActive.Count; i++)
             {
             tb[i].Text = elementsActive[i].Name;
             }
         }
         private void ShowCartoons_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < cb.Length; i++)
+            for (int i = 0; i < elementsCartoon.Count; i++)
             {
                 cb[i].Text = elementsCartoon[i].Name;
             }
         }
         private void ClearAll(ref TextBox[] t)
         {
-            for (int i = 0; i < t.Length; i++)
+            if (t==tb)
             {
-                t[i].Text = "";
+                for (int i = 0; i < elementsActive.Count; i++)
+                {
+                    t[i].Text = "";
+                }
+            }
+            if (t == cb)
+            {
+                for (int i = 0; i < elementsCartoon.Count; i++)
+                {
+                    t[i].Text = "";
+                }
+            }
+            if (t == sb)
+            {
+                for (int i = 0; i < elementsSerial.Count; i++)
+                {
+                    t[i].Text = "";
+                }
             }
         }
         private void Clear_Click(object sender, EventArgs e)
@@ -224,7 +227,7 @@ namespace Film
 
         private void Serial_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < sb.Length; i++)
+            for (int i = 0; i < elementsSerial.Count; i++)
             {
                 sb[i].Text = elementsSerial[i].Name;
             }
@@ -242,7 +245,11 @@ namespace Film
                     Activefields[j] = tb[j].Text;
                 }
                 T_Action_Movie objA = new T_Action_Movie(ref Activefields);
-                elementsActive.Add(objA);
+                if ((tb[1].Text) != "" && (tb[2].Text) != "" && ((tb[6].Text) == "0" || (tb[6].Text) == "1") && ((tb[7].Text) == "0" || (tb[7].Text) == "1"))
+                {
+                    elementsActive.Add(objA);
+                    BoxInit(tb, elementsActive.Count - 1, 10);
+                }
             }
             if (Enter_obj.SelectedItem == "Cartoon")
             {
@@ -253,7 +260,11 @@ namespace Film
                     Cartoonfields[j] = cb[j].Text;
                 }
                 T_Cartoon objC = new T_Cartoon(ref Cartoonfields);
-                elementsCartoon.Add(objC);
+                if ((cb[1].Text) != "" && (cb[2].Text) != "" && ((cb[6].Text) == "0" || (cb[6].Text) == "1") && ((cb[7].Text) == "0" || (cb[7].Text) == "1"))
+                {
+                    elementsCartoon.Add(objC);
+                    BoxInit(cb, elementsCartoon.Count - 1, 150);
+                }
             }
             if (Enter_obj.SelectedItem == "Serial")
             {
@@ -264,7 +275,11 @@ namespace Film
                     Serialfields[j] = sb[j].Text;
                 }
                 T_Serial objS = new T_Serial(ref Serialfields);
-                elementsSerial.Add(objS);
+                if ((sb[1].Text) != "" && (sb[2].Text) != "" && (sb[6].Text) != "" && (sb[7].Text) != "")
+                {
+                    elementsSerial.Add(objS);
+                    BoxInit(sb, elementsSerial.Count - 1, 300);
+                }
             }
         }
         public void Qsort(string[] fields, int l, int r)
@@ -305,8 +320,7 @@ namespace Film
             {
                 for (int i = 0; i < elementsActive.Count; i++)
                 {
-                    fieldsA[i] = elementsActive[i].Name.ToString();
-                    //fields.Add(elementsActive[i].Name);
+                    fieldsA[i] = elementsActive[i].Name;
                 }
                 Qsort(fieldsA, 0, fieldsA.Length - 1);
                 for (int i = 0; i < fieldsA.Length; i++)
@@ -315,8 +329,7 @@ namespace Film
                 }
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
-                    fieldsC[i] = elementsCartoon[i].Name.ToString();
-                    //fields.Add(elementsCartoon[i].Name);
+                    fieldsC[i] = elementsCartoon[i].Name;
                 }
                 Qsort(fieldsC, 0, fieldsC.Length - 1);
                 for (int i = 0; i < fieldsC.Length; i++)
@@ -326,8 +339,7 @@ namespace Film
 
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
-                    fieldsS[i] = elementsSerial[i].Name.ToString();
-                    //fields.Add(elementsSerial[i].Name);
+                    fieldsS[i] = elementsSerial[i].Name;
                 }
                 Qsort(fieldsS, 0, fieldsS.Length - 1);
                 for (int i = 0; i < fieldsS.Length; i++)
@@ -340,7 +352,6 @@ namespace Film
                 for (int i = 0; i < elementsActive.Count; i++)
                 {
                     fieldsA[i] = elementsActive[i].Year.ToString();
-                    //fields.Add(elementsActive[i].Year.ToString());
                 }
                 Qsort(fieldsA, 0, fieldsA.Length - 1);
                 for (int i = 0; i < fieldsA.Length; i++)
@@ -351,7 +362,6 @@ namespace Film
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
                     fieldsC[i] = elementsCartoon[i].Year.ToString();
-                    //fields.Add(elementsCartoon[i].Year.ToString());
                 }
                 Qsort(fieldsC, 0, fieldsC.Length - 1);
                 for (int i = 0; i < fieldsC.Length; i++)
@@ -362,7 +372,6 @@ namespace Film
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
                     fieldsS[i] = elementsSerial[i].Year.ToString();
-                    //fields.Add(elementsSerial[i].Year.ToString());
                 }
                 Qsort(fieldsS, 0, fieldsS.Length - 1);
                 for (int i = 0; i < fieldsS.Length; i++)
@@ -375,7 +384,6 @@ namespace Film
                 for (int i = 0; i < elementsActive.Count; i++)
                 {
                     fieldsA[i] = elementsActive[i].Time.ToString();
-                    //fields.Add(elementsActive[i].Time.ToString());
                 }
                 Qsort(fieldsS, 0, fieldsA.Length - 1);
                 for (int i = 0; i < fieldsA.Length; i++)
@@ -386,7 +394,6 @@ namespace Film
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
                     fieldsC[i] = elementsCartoon[i].Time.ToString();
-                    //fields.Add(elementsCartoon[i].Time.ToString());
                 }
                 Qsort(fieldsC, 0, fieldsC.Length - 1);
                 for (int i = 0; i < fieldsC.Length; i++)
@@ -397,7 +404,6 @@ namespace Film
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
                     fieldsS[i] = elementsSerial[i].Time.ToString();
-                    //fields.Add(elementsSerial[i].Time.ToString());
                 }
                 Qsort(fieldsS, 0, fieldsS.Length - 1);
                 for (int i = 0; i < fieldsS.Length; i++)
@@ -410,7 +416,6 @@ namespace Film
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
                     fieldsS[i] = elementsSerial[i].Num_Seasons.ToString();
-                    //fields.Add(elementsSerial[i].Num_Seasons.ToString());
                 }
                 Qsort(fieldsS, 0, fieldsS.Length - 1);
                 for (int i = 0; i < fieldsS.Length; i++)
@@ -423,7 +428,6 @@ namespace Film
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
                     fieldsS[i] = elementsSerial[i].Num_series.ToString();
-                    //fields.Add(elementsSerial[i].Num_series.ToString());
                 }
                 Qsort(fieldsS, 0, fieldsS.Length - 1);
                 for (int i = 0; i < fieldsS.Length; i++)
