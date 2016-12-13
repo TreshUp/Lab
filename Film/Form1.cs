@@ -30,10 +30,13 @@ namespace Film
             {
                 "0","1","2","3","4","5","6","7","8"
             };
-        string[] fields = new string[]
-            {
-                "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"
-            };
+        string[] fieldsA; //= new string[]
+        //    {
+        //        //"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"
+        //    };
+        ////IList<string> fields = new List<string>();
+        string[] fieldsC;
+        string[] fieldsS;
         public Form1()
         {
             InitializeComponent();
@@ -292,6 +295,9 @@ namespace Film
 
         private void Qsort_Click(object sender, EventArgs e)
         {
+            fieldsA = new string[elementsActive.Count];
+            fieldsC = new string[elementsCartoon.Count];
+            fieldsS = new string[elementsSerial.Count];
             ClearAll(ref tb);
             ClearAll(ref cb);
             ClearAll(ref sb);
@@ -299,119 +305,130 @@ namespace Film
             {
                 for (int i = 0; i < elementsActive.Count; i++)
                 {
-                    fields[i] = elementsActive[i].Name.ToString();
+                    fieldsA[i] = elementsActive[i].Name.ToString();
+                    //fields.Add(elementsActive[i].Name);
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsA, 0, fieldsA.Length - 1);
+                for (int i = 0; i < fieldsA.Length; i++)
                 {
-                    tb[i].Text = fields[i];
+                    tb[i].Text = fieldsA[i];
                 }
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
-                    fields[i] = elementsCartoon[i].Name.ToString();
+                    fieldsC[i] = elementsCartoon[i].Name.ToString();
+                    //fields.Add(elementsCartoon[i].Name);
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsC, 0, fieldsC.Length - 1);
+                for (int i = 0; i < fieldsC.Length; i++)
                 {
-                    cb[i].Text = fields[i];
+                    cb[i].Text = fieldsC[i];
                 }
 
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
-                    fields[i] = elementsSerial[i].Name.ToString();
+                    fieldsS[i] = elementsSerial[i].Name.ToString();
+                    //fields.Add(elementsSerial[i].Name);
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                for (int i = 0; i < fieldsS.Length; i++)
                 {
-                    sb[i].Text = fields[i];
+                    sb[i].Text = fieldsS[i];
                 }
             }
             if (QsortBox.Text == "Year")
             {
                 for (int i = 0; i < elementsActive.Count; i++)
                 {
-                    fields[i] = elementsActive[i].Year.ToString();
+                    fieldsA[i] = elementsActive[i].Year.ToString();
+                    //fields.Add(elementsActive[i].Year.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsA, 0, fieldsA.Length - 1);
+                for (int i = 0; i < fieldsA.Length; i++)
                 {
-                    tb[i].Text = fields[i];
+                    tb[i].Text = fieldsA[i];
                 }
 
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
-                    fields[i] = elementsCartoon[i].Year.ToString();
+                    fieldsC[i] = elementsCartoon[i].Year.ToString();
+                    //fields.Add(elementsCartoon[i].Year.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsC, 0, fieldsC.Length - 1);
+                for (int i = 0; i < fieldsC.Length; i++)
                 {
-                    cb[i].Text = fields[i];
+                    cb[i].Text = fieldsC[i];
                 }
 
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
-                    fields[i] = elementsSerial[i].Year.ToString();
+                    fieldsS[i] = elementsSerial[i].Year.ToString();
+                    //fields.Add(elementsSerial[i].Year.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                for (int i = 0; i < fieldsS.Length; i++)
                 {
-                    sb[i].Text = fields[i];
+                    sb[i].Text = fieldsS[i];
                 }
             }
             if (QsortBox.Text == "Time")
             {
                 for (int i = 0; i < elementsActive.Count; i++)
                 {
-                    fields[i] = elementsActive[i].Time.ToString();
+                    fieldsA[i] = elementsActive[i].Time.ToString();
+                    //fields.Add(elementsActive[i].Time.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsS, 0, fieldsA.Length - 1);
+                for (int i = 0; i < fieldsA.Length; i++)
                 {
-                    tb[i].Text = fields[i];
+                    tb[i].Text = fieldsS[i];
                 }
 
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
-                    fields[i] = elementsCartoon[i].Time.ToString();
+                    fieldsC[i] = elementsCartoon[i].Time.ToString();
+                    //fields.Add(elementsCartoon[i].Time.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsC, 0, fieldsC.Length - 1);
+                for (int i = 0; i < fieldsC.Length; i++)
                 {
-                    cb[i].Text = fields[i];
+                    cb[i].Text = fieldsC[i];
                 }
 
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
-                    fields[i] = elementsSerial[i].Time.ToString();
+                    fieldsS[i] = elementsSerial[i].Time.ToString();
+                    //fields.Add(elementsSerial[i].Time.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                for (int i = 0; i < fieldsS.Length; i++)
                 {
-                    sb[i].Text = fields[i];
+                    sb[i].Text = fieldsS[i];
                 }
             }
             if (QsortBox.Text == "Num_Seasons")
             {
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
-                    fields[i] = elementsSerial[i].Num_Seasons.ToString();
+                    fieldsS[i] = elementsSerial[i].Num_Seasons.ToString();
+                    //fields.Add(elementsSerial[i].Num_Seasons.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                for (int i = 0; i < fieldsS.Length; i++)
                 {
-                    sb[i].Text = fields[i];
+                    sb[i].Text = fieldsS[i];
                 }
             }
             if (QsortBox.Text == "Num_Series")
             {
                 for (int i = 0; i < elementsSerial.Count; i++)
                 {
-                    fields[i] = elementsSerial[i].Num_series.ToString();
+                    fieldsS[i] = elementsSerial[i].Num_series.ToString();
+                    //fields.Add(elementsSerial[i].Num_series.ToString());
                 }
-                Qsort(fields, 0, fields.Length - 1);
-                for (int i = 0; i < fields.Length; i++)
+                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                for (int i = 0; i < fieldsS.Length; i++)
                 {
-                    sb[i].Text = fields[i];
+                    sb[i].Text = fieldsS[i];
                 }
             }
         }
