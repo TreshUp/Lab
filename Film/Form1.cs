@@ -17,7 +17,6 @@ namespace Film
         TextBox[] tb; 
         TextBox[] cb; 
         TextBox[] sb; 
-        public event Action Changed;
         string[] Activefields = new string[14];
 
         string[] Cartoonfields = new string[10];
@@ -42,7 +41,7 @@ namespace Film
             QsortBox.Items.Add("Time");
             QsortBox.Items.Add("Num_Seasons");
             QsortBox.Items.Add("Num_Series");
-            for(int i=1;i<3*n+1;i+=3) //todo nomer
+            for(int i=1;i<3*n+1;i+=3)
             {
                 T_Action_Movie objA = new T_Action_Movie();
                 T_Cartoon objC = new T_Cartoon();
@@ -235,6 +234,7 @@ namespace Film
 
         private void Enter_obj_SelectionChangeCommitted(object sender, EventArgs e) //todo ssylka
         {
+            bool flag=false;
             Poisk.Text = "";
             if (Enter_obj.SelectedItem == "Action Movie")
             {
@@ -244,42 +244,86 @@ namespace Film
                 {
                     Activefields[j] = tb[j].Text;
                 }
-                T_Action_Movie objA = new T_Action_Movie(ref Activefields);
-                if ((tb[1].Text) != "" && (tb[2].Text) != "" && ((tb[6].Text) == "0" || (tb[6].Text) == "1") && ((tb[7].Text) == "0" || (tb[7].Text) == "1"))
+                for (int j=0;j<elementsActive.Count;j++)
                 {
-                    elementsActive.Add(objA);
-                    BoxInit(tb, elementsActive.Count - 1, 10);
+                    if (String.Compare(elementsActive[j].Name, Activefields[0], new CultureInfo(""), CompareOptions.IgnoreCase) == 0)
+                    {
+                        flag=true;
+                    }
+
                 }
+                if (flag != true)
+                {
+                    try
+                    {
+                        T_Action_Movie objA = new T_Action_Movie(ref Activefields);
+                        elementsActive.Add(objA);
+                        BoxInit(tb, elementsActive.Count - 1, 10);
+                    }
+                    catch (FormatException r) { MessageBox.Show(r.Message);  }
+                    catch (ArgumentException s) { MessageBox.Show(s.Message); }
+                }
+                else MessageBox.Show("Same data.");
             }
             if (Enter_obj.SelectedItem == "Cartoon")
             {
+                flag = false;
                 ClearAll(ref tb);
                 ClearAll(ref sb);
                 for (int j = 0; j < Cartoonfields.Length; j++)
                 {
                     Cartoonfields[j] = cb[j].Text;
                 }
-                T_Cartoon objC = new T_Cartoon(ref Cartoonfields);
-                if ((cb[1].Text) != "" && (cb[2].Text) != "" && ((cb[6].Text) == "0" || (cb[6].Text) == "1") && ((cb[7].Text) == "0" || (cb[7].Text) == "1"))
+                for (int j = 0; j < elementsCartoon.Count; j++)
                 {
-                    elementsCartoon.Add(objC);
-                    BoxInit(cb, elementsCartoon.Count - 1, 150);
+                    if (String.Compare(elementsCartoon[j].Name, Cartoonfields[0], new CultureInfo(""), CompareOptions.IgnoreCase) == 0)
+                    {
+                        flag = true;
+                    }
+
                 }
+                if (flag != true)
+                {
+                    try
+                    {
+                        T_Cartoon objC = new T_Cartoon(ref Cartoonfields);
+                        elementsCartoon.Add(objC);
+                        BoxInit(cb, elementsCartoon.Count - 1, 150);
+                    }
+                    catch (FormatException r) { MessageBox.Show(r.Message); }
+                    catch (ArgumentException s) { MessageBox.Show(s.Message); }
+                }
+                else MessageBox.Show("Same data.");
             }
             if (Enter_obj.SelectedItem == "Serial")
             {
+                flag = false;
                 ClearAll(ref cb);
                 ClearAll(ref tb);
                 for (int j = 0; j < Serialfields.Length; j++)
                 {
                     Serialfields[j] = sb[j].Text;
                 }
-                T_Serial objS = new T_Serial(ref Serialfields);
-                if ((sb[1].Text) != "" && (sb[2].Text) != "" && (sb[6].Text) != "" && (sb[7].Text) != "")
+                for (int j = 0; j < elementsSerial.Count; j++)
                 {
-                    elementsSerial.Add(objS);
-                    BoxInit(sb, elementsSerial.Count - 1, 300);
+                    if (String.Compare(elementsSerial[j].Name, Serialfields[0], new CultureInfo(""), CompareOptions.IgnoreCase) == 0)
+                    {
+                        flag = true;
+                    }
+
                 }
+                if (flag != true)
+                {
+                    try
+                    {
+                        T_Serial objS = new T_Serial(ref Serialfields);
+                        elementsSerial.Add(objS);
+                        BoxInit(sb, elementsSerial.Count - 1, 300);
+                    }
+                    catch (FormatException r) { MessageBox.Show(r.Message); }
+                    catch (ArgumentException s) { MessageBox.Show(s.Message); }
+                }
+                else MessageBox.Show("Same data.");
             }
         }
         public void Qsort(string[] fields, int l, int r)
