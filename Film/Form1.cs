@@ -326,7 +326,7 @@ namespace Film
                 else MessageBox.Show("Same data.");
             }
         }
-        public void Qsort(string[] fields, int l, int r)
+        public void Qsort(string[] fields, int l, int r,bool flag)
         {
             string temp;
             string x = fields[l + (r - l) / 2];
@@ -334,8 +334,16 @@ namespace Film
             int j = r;
             while (i <= j)
             {
-                while (String.Compare(fields[i], x, new CultureInfo(""), CompareOptions.IgnoreCase) > 0) i++;
-                while (String.Compare(fields[j], x, new CultureInfo(""), CompareOptions.IgnoreCase) < 0) j--;
+                if (flag == false)
+                {
+                    while (String.Compare(fields[i], x, new CultureInfo(""), CompareOptions.IgnoreCase) < 0) i++;
+                    while (String.Compare(fields[j], x, new CultureInfo(""), CompareOptions.IgnoreCase) > 0) j--;
+                }
+                else
+                {
+                    while (int.Parse(fields[i]) < int.Parse(x)) i++;
+                    while (int.Parse(fields[j]) > int.Parse(x)) j--;
+                }
                 if (i <= j)
                 {
                     temp = fields[i];
@@ -345,11 +353,26 @@ namespace Film
                     j--;
                 }
             }
-            if (i < r)
-                Qsort(fields, i, r);
-
-            if (l < j)
-                Qsort(fields, l, j);
+            if (flag == false)
+            {
+                if (i < r)
+                    Qsort(fields, i, r,false);
+            }
+            else
+            {
+                if (i < r)
+                    Qsort(fields, i, r, true);
+            }
+            if (flag == false)
+            {
+                if (l < j)
+                    Qsort(fields, l, j,false);
+            }
+            else
+            {
+                if (l < j)
+                    Qsort(fields, l, j, true);
+            }
         }
 
         private void Qsort_Click(object sender, EventArgs e)
@@ -366,7 +389,7 @@ namespace Film
                 {
                     fieldsA[i] = elementsActive[i].Name;
                 }
-                Qsort(fieldsA, 0, fieldsA.Length - 1);
+                Qsort(fieldsA, 0, fieldsA.Length - 1,false);
                 for (int i = 0; i < fieldsA.Length; i++)
                 {
                     tb[i].Text = fieldsA[i];
@@ -375,7 +398,7 @@ namespace Film
                 {
                     fieldsC[i] = elementsCartoon[i].Name;
                 }
-                Qsort(fieldsC, 0, fieldsC.Length - 1);
+                Qsort(fieldsC, 0, fieldsC.Length - 1,false);
                 for (int i = 0; i < fieldsC.Length; i++)
                 {
                     cb[i].Text = fieldsC[i];
@@ -385,7 +408,7 @@ namespace Film
                 {
                     fieldsS[i] = elementsSerial[i].Name;
                 }
-                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                Qsort(fieldsS, 0, fieldsS.Length - 1, false);
                 for (int i = 0; i < fieldsS.Length; i++)
                 {
                     sb[i].Text = fieldsS[i];
@@ -397,7 +420,7 @@ namespace Film
                 {
                     fieldsA[i] = elementsActive[i].Year.ToString();
                 }
-                Qsort(fieldsA, 0, fieldsA.Length - 1);
+                Qsort(fieldsA, 0, fieldsA.Length - 1,true);
                 for (int i = 0; i < fieldsA.Length; i++)
                 {
                     tb[i].Text = fieldsA[i];
@@ -407,7 +430,7 @@ namespace Film
                 {
                     fieldsC[i] = elementsCartoon[i].Year.ToString();
                 }
-                Qsort(fieldsC, 0, fieldsC.Length - 1);
+                Qsort(fieldsC, 0, fieldsC.Length - 1,true);
                 for (int i = 0; i < fieldsC.Length; i++)
                 {
                     cb[i].Text = fieldsC[i];
@@ -417,7 +440,7 @@ namespace Film
                 {
                     fieldsS[i] = elementsSerial[i].Year.ToString();
                 }
-                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                Qsort(fieldsS, 0, fieldsS.Length - 1,true);
                 for (int i = 0; i < fieldsS.Length; i++)
                 {
                     sb[i].Text = fieldsS[i];
@@ -429,17 +452,16 @@ namespace Film
                 {
                     fieldsA[i] = elementsActive[i].Time.ToString();
                 }
-                Qsort(fieldsS, 0, fieldsA.Length - 1);
+                Qsort(fieldsA, 0, fieldsA.Length - 1,true);
                 for (int i = 0; i < fieldsA.Length; i++)
                 {
-                    tb[i].Text = fieldsS[i];
+                    tb[i].Text = fieldsA[i];
                 }
-
                 for (int i = 0; i < elementsCartoon.Count; i++)
                 {
                     fieldsC[i] = elementsCartoon[i].Time.ToString();
                 }
-                Qsort(fieldsC, 0, fieldsC.Length - 1);
+                Qsort(fieldsC, 0, fieldsC.Length - 1,true);
                 for (int i = 0; i < fieldsC.Length; i++)
                 {
                     cb[i].Text = fieldsC[i];
@@ -449,7 +471,7 @@ namespace Film
                 {
                     fieldsS[i] = elementsSerial[i].Time.ToString();
                 }
-                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                Qsort(fieldsS, 0, fieldsS.Length - 1,true);
                 for (int i = 0; i < fieldsS.Length; i++)
                 {
                     sb[i].Text = fieldsS[i];
@@ -461,7 +483,7 @@ namespace Film
                 {
                     fieldsS[i] = elementsSerial[i].Num_Seasons.ToString();
                 }
-                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                Qsort(fieldsS, 0, fieldsS.Length - 1, true);
                 for (int i = 0; i < fieldsS.Length; i++)
                 {
                     sb[i].Text = fieldsS[i];
@@ -473,7 +495,7 @@ namespace Film
                 {
                     fieldsS[i] = elementsSerial[i].Num_series.ToString();
                 }
-                Qsort(fieldsS, 0, fieldsS.Length - 1);
+                Qsort(fieldsS, 0, fieldsS.Length - 1, true);
                 for (int i = 0; i < fieldsS.Length; i++)
                 {
                     sb[i].Text = fieldsS[i];
